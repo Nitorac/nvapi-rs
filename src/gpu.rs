@@ -885,7 +885,7 @@ impl PhysicalGpu {
         let mut data = i2c::NV_I2C_INFO::default();
         data.displayMask = display_mask;
         data.bIsDDCPort = if port_is_ddc { sys::NV_TRUE } else { sys::NV_FALSE } as _;
-        data.i2cDevAddress = address << 1;
+        data.i2cDevAddress = address << 1 | 1;
         data.pbI2cRegAddress = if register.is_empty() { ptr::null_mut() } else { register.as_ptr() as *mut _ };
         data.regAddrSize = register.len() as _;
         data.pbData = bytes.as_mut_ptr();
